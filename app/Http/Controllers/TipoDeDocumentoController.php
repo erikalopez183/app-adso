@@ -4,32 +4,44 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Tipo_De_Documento;
 
-class TipoDeDocumentoController extends Controller
+class TipodedocumentoController extends Controller
 {
     //
 
     public function getData(Request $request){
    
-        $rta= 10+20;
+        $Tipo_de_documento=Tipo_de_documento::all();
+
         return response()->json([
             'status' => '200',
             'mensage' => 'data..',
-            'result' => $rta
+            'result' => $Tipo_de_documento
         ]);
     }
         public function save(Request $request){
     
-            $rta= 10+20;
-            return response()->json([
+            $Tipo_de_documento=Tipo_de_documento::create([
+                'nombre'=>$request->nombre,
+            ]);
+
+                return response()->json([
                 'status' => '200',
                 'message' => 'guardado con exito',
+                'data' => $Tipo_de_documento,
+
                 ]);
             }
     
         public function update(Request $request){
     
-                $rta= 10+20;
+            $Tipo_de_documento=Tipo_de_documento::findOrFail($request->id);
+            
+            $Tipo_de_documento->update([
+                "nombre"=>$request->nombre,
+            ]);
+
                 return response()->json([
                         'status' => '200',
                         'message' => 'actualizado con exito',
@@ -38,8 +50,10 @@ class TipoDeDocumentoController extends Controller
     
         public function delete(Request $request){
     
-                $rta= 10+20;
-                return response()->json([
+            $Tipo_de_documento=Tipo_de_documento::findOrFail($request->id);            
+            $Tipo_de_documento->delete();
+                       
+            return response()->json([
                         'status' => '200',
                         'message' => 'eliminado con exito',
                 ]);

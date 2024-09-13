@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Clasificacion_Tributaria;
 
 class ClasificacionTributariaController extends Controller
 {
@@ -11,25 +12,35 @@ class ClasificacionTributariaController extends Controller
 
     public function getData(Request $request){
    
-        $rta= 10+20;
+        $Clasificacion_Tributaria=Clasificacion_Tributaria::all();
+
         return response()->json([
             'status' => '200',
             'mensage' => 'data..',
-            'result' => $rta
+            'result' => $Clasificacion_Tributaria
         ]);
     }
         public function save(Request $request){
     
-            $rta= 10+20;
+            $Clasificacion_Tributaria=Clasificacion_Tributaria::create([
+                'nombre'=>$request->nombre,
+            ]);
+
             return response()->json([
                 'status' => '200',
                 'message' => 'guardado con exito',
+                'data' => $Clasificacion_Tributaria,
                 ]);
             }
     
         public function update(Request $request){
     
-                $rta= 10+20;
+            $Clasificacion_Tributaria=Clasificacion_Tributaria::findOrFail($request->id);
+            
+            $Clasificacion_Tributaria->update([
+                "nombre"=>$request->nombre,
+            ]);
+
                 return response()->json([
                         'status' => '200',
                         'message' => 'actualizado con exito',
@@ -38,7 +49,9 @@ class ClasificacionTributariaController extends Controller
     
         public function delete(Request $request){
     
-                $rta= 10+20;
+            $Clasificacion_Tributaria=Clasificacion_Tributaria::findOrFail($request->id);            
+            $Clasificacion_Tributaria->delete();
+
                 return response()->json([
                         'status' => '200',
                         'message' => 'eliminado con exito',
