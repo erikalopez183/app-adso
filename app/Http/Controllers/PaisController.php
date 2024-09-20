@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Pais;
 
 class PaisController extends Controller
 {
@@ -11,25 +12,36 @@ class PaisController extends Controller
 
     public function getData(Request $request){
    
-        $rta= 10+20;
+        $Pais=Pais::all();
+
         return response()->json([
             'status' => '200',
             'mensage' => 'data..',
-            'result' => $rta
+            'result' => $Pais
         ]);
     }
         public function save(Request $request){
     
-            $rta= 10+20;
-            return response()->json([
+            $Pais=Pais::create([
+                'nombre'=>$request->nombre,
+            ]);
+
+                 return response()->json([
                 'status' => '200',
                 'message' => 'guardado con exito',
+                'data' => $Pais,
+
                 ]);
             }
     
         public function update(Request $request){
     
-                $rta= 10+20;
+            $Pais=Pais::findOrFail($request->id);
+            
+            $Pais->update([
+                "nombre"=>$request->nombre,
+            ]);
+
                 return response()->json([
                         'status' => '200',
                         'message' => 'actualizado con exito',
@@ -38,7 +50,9 @@ class PaisController extends Controller
     
         public function delete(Request $request){
     
-                $rta= 10+20;
+            $Pais=Pais::findOrFail($request->id);            
+            $Pais->delete();
+
                 return response()->json([
                         'status' => '200',
                         'message' => 'eliminado con exito',

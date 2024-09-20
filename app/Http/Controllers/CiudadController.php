@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Ciudad;
 
 class CiudadController extends Controller
 {
@@ -11,25 +12,37 @@ class CiudadController extends Controller
 
     public function getData(Request $request){
    
-    $rta= 10+20;
+        $Ciudad=Ciudad::all();
+
     return response()->json([
         'status' => '200',
         'mensage' => 'data..',
-        'result' => $rta
+        'result' => $Ciudad
     ]);
 }
     public function save(Request $request){
 
-        $rta= 10+20;
+        $Ciudad=Ciudad::create([
+            'nombre'=>$request->nombre, 
+            'id_departamento'=>$request->id_departamento, 
+        ]);
+
         return response()->json([
             'status' => '200',
             'message' => 'guardado con exito',
+            'data' => $Ciudad,
             ]);
         }
 
     public function update(Request $request){
 
-            $rta= 10+20;
+        $Ciudad=Ciudad::findOrFail($request->id);
+            
+        $Ciudad->update([
+            "nombre"=>$request->nombre,
+            'id_departamento'=>$request->id_departamento,
+        ]);
+
             return response()->json([
                     'status' => '200',
                     'message' => 'actualizado con exito',
@@ -38,7 +51,9 @@ class CiudadController extends Controller
 
     public function delete(Request $request){
 
-            $rta= 10+20;
+        $Ciudad=Ciudad::findOrFail($request->id);            
+        $Ciudad->delete();
+
             return response()->json([
                     'status' => '200',
                     'message' => 'eliminado con exito',

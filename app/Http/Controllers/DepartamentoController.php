@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Departamento;
 
 class DepartamentoController extends Controller
 {
@@ -11,25 +12,37 @@ class DepartamentoController extends Controller
 
     public function getData(Request $request){
    
-        $rta= 10+20;
+        $Departamento=Departamento::all();
+
         return response()->json([
             'status' => '200',
             'mensage' => 'data..',
-            'result' => $rta
+            'result' => $Departamento
         ]);
     }
         public function save(Request $request){
     
-            $rta= 10+20;
+            $Departamento=Departamento::create([
+                'nombre'=>$request->nombre, 
+                'id_pais'=>$request->id_pais, 
+            ]);
+
             return response()->json([
                 'status' => '200',
                 'message' => 'guardado con exito',
+                'data' => $Departamento,
                 ]);
             }
     
         public function update(Request $request){
     
-                $rta= 10+20;
+            $Departamento=Departamento::findOrFail($request->id);
+            
+            $Departamento->update([
+                "nombre"=>$request->nombre,
+                'id_pais'=>$request->id_pais, 
+            ]);
+
                 return response()->json([
                         'status' => '200',
                         'message' => 'actualizado con exito',
@@ -38,7 +51,9 @@ class DepartamentoController extends Controller
     
         public function delete(Request $request){
     
-                $rta= 10+20;
+            $Departamento=Departamento::findOrFail($request->id);            
+            $Departamento->delete();
+
                 return response()->json([
                         'status' => '200',
                         'message' => 'eliminado con exito',

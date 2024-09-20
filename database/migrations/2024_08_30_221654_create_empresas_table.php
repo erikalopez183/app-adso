@@ -27,12 +27,13 @@ return new class extends Migration
             //$table->foreign('user_id')->references('id')->on('users');  
             $table->foreign('id_clasificacion_tributaria')->references('id')->on('clasificacion_tributarias');
             
-            $table->string('nombre o razon social');
+            $table->string('nombre_razon_social');
             $table->string('direccion');
             $table->string('telefono');
               //$table->unsignedBigInteger('user_id');
               $table->unsignedBigInteger('id_ciudad');
  
+
               //$table->foreign('user_id')->references('id')->on('users');
               $table->foreign('id_ciudad')->references('id')->on('ciudads');
               $table->string('correo_electronico');

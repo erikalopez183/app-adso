@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Cargo;
 
 class CargoController extends Controller
 {
@@ -11,25 +12,35 @@ class CargoController extends Controller
 
     public function getData(Request $request){
    
-    $rta= 10+20;
+        $Cargo=Cargo::all();
+
     return response()->json([
         'status' => '200',
         'mensage' => 'data..',
-        'result' => $rta
+        'result' => $Cargo
     ]);
 }
     public function save(Request $request){
 
-        $rta= 10+20;
+        $Cargo=Cargo::create([
+            'nombre'=>$request->nombre,
+        ]);
+
         return response()->json([
             'status' => '200',
             'message' => 'guardado con exito',
+            'data' => $Cargo,
             ]);
         }
 
     public function update(Request $request){
 
-            $rta= 10+20;
+        $Cargo=Cargo::findOrFail($request->id);
+            
+        $Cargo->update([
+                "nombre"=>$request->nombre,
+            ]);
+
             return response()->json([
                     'status' => '200',
                     'message' => 'actualizado con exito',
@@ -38,7 +49,9 @@ class CargoController extends Controller
 
     public function delete(Request $request){
 
-            $rta= 10+20;
+        $Cargo=Cargo::findOrFail($request->id);            
+        $Cargo->delete();
+
             return response()->json([
                     'status' => '200',
                     'message' => 'eliminado con exito',

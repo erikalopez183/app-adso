@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Usuario;
 
 class UsuarioController extends Controller
 {
@@ -11,25 +12,38 @@ class UsuarioController extends Controller
 
     public function getData(Request $request){
    
-        $rta= 10+20;
+        $Usuario=Usuario::all();
+
         return response()->json([
             'status' => '200',
             'mensage' => 'data..',
-            'result' => $rta
+            'result' => $Usuario
         ]);
     }
         public function save(Request $request){
     
-            $rta= 10+20;
+            $Usuario=Usuario::create([
+                'nombre'=>$request->nombre, 
+                'id_tercero'=>$request->id_tercero, 
+                
+            ]);
+
             return response()->json([
                 'status' => '200',
                 'message' => 'guardado con exito',
+                'data' => $Usuario,
                 ]);
             }
     
         public function update(Request $request){
     
-                $rta= 10+20;
+            $Usuario=Usuario::findOrFail($request->id);
+            
+            $Usuario->update([
+                'nombre'=>$request->nombre, 
+                'id_tercero'=>$request->id_tercero, 
+            ]);
+
                 return response()->json([
                         'status' => '200',
                         'message' => 'actualizado con exito',
@@ -38,7 +52,9 @@ class UsuarioController extends Controller
     
         public function delete(Request $request){
     
-                $rta= 10+20;
+            $Usuario=Usuario::findOrFail($request->id);            
+            $Usuario->delete();
+
                 return response()->json([
                         'status' => '200',
                         'message' => 'eliminado con exito',

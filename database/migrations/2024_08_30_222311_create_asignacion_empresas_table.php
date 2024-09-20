@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('asignacion_empresas', function (Blueprint $table) {
             $table->id();
+
+            $table->unsignedBigInteger('id_tercero');
+             //$table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('id_tercero')->references('id')->on('terceros');
               //$table->unsignedBigInteger('user_id');
               $table->unsignedBigInteger('id_empresa');
  
