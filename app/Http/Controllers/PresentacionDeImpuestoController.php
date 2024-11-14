@@ -20,6 +20,16 @@ class PresentacionDeImpuestoController extends Controller
             'result' => $Presentacion_de_impuesto
         ]);
     }
+    public function getDataById(Request $request){
+
+        $Presentacion_de_impuesto= presentacion_de_impuesto::where('id',$request->id)->get();
+    
+        return response()->json([
+            'status' => '200',
+            'message' => 'data..',
+            'data'=> $Presentacion_de_impuesto
+        ]);
+    }
         public function save(Request $request){
     
             $Presentacion_de_impuesto=Presentacion_de_impuesto::create([

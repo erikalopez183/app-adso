@@ -20,6 +20,16 @@ class InformacionDeImpuestoController extends Controller
             'result' => $Informacion_de_impuesto
         ]);
     }
+    public function getDataById(Request $request){
+
+        $Informacion_de_impuesto= informacion_de_impuesto::where('id',$request->id)->get();
+    
+        return response()->json([
+            'status' => '200',
+            'message' => 'data..',
+            'data'=> $Informacion_de_impuesto
+        ]);
+    }
         public function save(Request $request){
     
             $Informacion_de_impuesto=Informacion_de_impuesto::create([

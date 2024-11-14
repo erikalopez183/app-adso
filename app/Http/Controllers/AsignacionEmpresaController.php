@@ -13,10 +13,21 @@ class AsignacionEmpresaController extends Controller
     public function getData(Request $request){
    
         $Asignacion_empresa=Asignacion_empresa::all();
+
         return response()->json([
         'status' => '200',
         'mensage' => 'data..',
         'result' => $Asignacion_empresa
+    ]);
+}
+public function getDataById(Request $request){
+
+    $Asignacion_empresa= asignacion_empresa::where('id',$request->id)->get();
+
+    return response()->json([
+        'status' => '200',
+        'message' => 'data..',
+        'data'=> $Asignacion_empresa
     ]);
 }
     public function save(Request $request){

@@ -20,6 +20,16 @@ class RevisionImpuestoController extends Controller
             'result' => $Revision_impuesto
         ]);
     }
+    public function getDataById(Request $request){
+
+        $Revision_impuesto= revision_impuesto::where('id',$request->id)->get();
+    
+        return response()->json([
+            'status' => '200',
+            'message' => 'data..',
+            'data'=> $Revision_impuesto
+        ]);
+    }
         public function save(Request $request){
     
             $Revision_impuesto=Revision_impuesto::create([

@@ -20,6 +20,16 @@ class TipoDeDeclaracionController extends Controller
             'result' => $Tipo_de_declaracion
         ]);
     }
+    public function getDataById(Request $request){
+
+        $Tipo_de_declaracion= Tipo_de_declaracion::where('id',$request->id)->get();
+    
+        return response()->json([
+            'status' => '200',
+            'message' => 'data..',
+            'data'=> $Tipo_de_declaracion
+        ]);
+    }
         public function save(Request $request){
     
             $Tipo_de_declaracion=Tipo_de_declaracion::create([

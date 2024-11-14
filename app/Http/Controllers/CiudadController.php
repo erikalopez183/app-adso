@@ -20,6 +20,16 @@ class CiudadController extends Controller
         'result' => $Ciudad
     ]);
 }
+public function getDataById(Request $request){
+
+    $Ciudad= ciudad::where('id',$request->id)->get();
+
+    return response()->json([
+        'status' => '200',
+        'message' => 'data..',
+        'data'=> $Ciudad
+    ]);
+}
     public function save(Request $request){
 
         $Ciudad=Ciudad::create([

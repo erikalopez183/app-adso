@@ -20,6 +20,16 @@ class EmpresaController extends Controller
             'result' => $Empresa
         ]);
     }
+    public function getDataById(Request $request){
+
+        $Empresa= empresa::where('id',$request->id)->get();
+    
+        return response()->json([
+            'status' => '200',
+            'message' => 'data..',
+            'data'=> $Empresa
+        ]);
+    }
         public function save(Request $request){
     
             $Empresa=Empresa::create([

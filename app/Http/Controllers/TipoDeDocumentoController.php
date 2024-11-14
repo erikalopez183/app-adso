@@ -20,6 +20,16 @@ class TipodedocumentoController extends Controller
             'result' => $Tipo_de_documento
         ]);
     }
+    public function getDataById(Request $request){
+
+        $Tipo_de_documento= Tipo_de_documento::where('id',$request->id)->get();
+    
+        return response()->json([
+            'status' => '200',
+            'message' => 'data..',
+            'data'=> $Tipo_de_documento
+        ]);
+    }
         public function save(Request $request){
     
             $Tipo_de_documento=Tipo_de_documento::create([

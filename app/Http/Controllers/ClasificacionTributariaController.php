@@ -20,6 +20,16 @@ class ClasificacionTributariaController extends Controller
             'result' => $Clasificacion_Tributaria
         ]);
     }
+    public function getDataById(Request $request){
+
+        $Clasificacion_Tributaria= clasificacion_tributaria::where('id',$request->id)->get();
+    
+        return response()->json([
+            'status' => '200',
+            'message' => 'data..',
+            'data'=> $Clasificacion_Tributaria
+        ]);
+    }
         public function save(Request $request){
     
             $Clasificacion_Tributaria=Clasificacion_Tributaria::create([

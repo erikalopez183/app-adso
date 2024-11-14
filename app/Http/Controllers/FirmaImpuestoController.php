@@ -20,6 +20,16 @@ class FirmaImpuestoController extends Controller
             'result' => $Firma_impuesto
         ]);
     }
+    public function getDataById(Request $request){
+
+        $Firma_impuesto= firma_impuesto::where('id',$request->id)->get();
+    
+        return response()->json([
+            'status' => '200',
+            'message' => 'data..',
+            'data'=> $Firma_impuesto
+        ]);
+    }
         public function save(Request $request){
     
             $Firma_impuesto=Firma_impuesto::create([

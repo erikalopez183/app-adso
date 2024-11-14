@@ -20,6 +20,16 @@ class TerceroController extends Controller
             'result' => $Tercero
         ]);
     }
+    public function getDataById(Request $request){
+
+        $Tercero= tercero::where('id',$request->id)->get();
+    
+        return response()->json([
+            'status' => '200',
+            'message' => 'data..',
+            'data'=> $Tercero
+        ]);
+    }
         public function save(Request $request){
     
             $Tercero=Tercero::create([

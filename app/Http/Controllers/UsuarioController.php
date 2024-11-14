@@ -20,6 +20,16 @@ class UsuarioController extends Controller
             'result' => $Usuario
         ]);
     }
+    public function getDataById(Request $request){
+
+        $Usuario= usuario::where('id',$request->id)->get();
+    
+        return response()->json([
+            'status' => '200',
+            'message' => 'data..',
+            'data'=> $Usuario
+        ]);
+    }
         public function save(Request $request){
     
             $Usuario=Usuario::create([

@@ -20,6 +20,16 @@ class PaisController extends Controller
             'result' => $Pais
         ]);
     }
+    public function getDataById(Request $request){
+
+        $Pais= Pais::where('id',$request->id)->get();
+    
+        return response()->json([
+            'status' => '200',
+            'message' => 'data..',
+            'data'=> $Pais
+        ]);
+    }
         public function save(Request $request){
     
             $Pais=Pais::create([

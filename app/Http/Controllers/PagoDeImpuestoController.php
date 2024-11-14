@@ -20,6 +20,16 @@ class PagoDeImpuestoController extends Controller
             'result' => $Pago_de_impuesto
         ]);
     }
+    public function getDataById(Request $request){
+
+        $Pago_de_impuesto= pago_de_impuesto::where('id',$request->id)->get();
+    
+        return response()->json([
+            'status' => '200',
+            'message' => 'data..',
+            'data'=> $Pago_de_impuesto
+        ]);
+    }
         public function save(Request $request){
     
             $Pago_de_impuesto=Pago_de_impuesto::create([

@@ -20,6 +20,16 @@ class PeriodicidadDeclaracionController extends Controller
             'result' => $Periodicidad_declaracion
         ]);
     }
+    public function getDataById(Request $request){
+
+        $Periodicidad_declaracion= periodicidad_declaracion::where('id',$request->id)->get();
+    
+        return response()->json([
+            'status' => '200',
+            'message' => 'data..',
+            'data'=> $Periodicidad_declaracion
+        ]);
+    }
         public function save(Request $request){
     
             $Periodicidad_declaracion=Periodicidad_declaracion::create([

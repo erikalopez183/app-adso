@@ -20,6 +20,16 @@ class DepartamentoController extends Controller
             'result' => $Departamento
         ]);
     }
+    public function getDataById(Request $request){
+
+        $Departamento= departamento::where('id',$request->id)->get();
+    
+        return response()->json([
+            'status' => '200',
+            'message' => 'data..',
+            'data'=> $Departamento
+        ]);
+    }
         public function save(Request $request){
     
             $Departamento=Departamento::create([

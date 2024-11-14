@@ -20,6 +20,17 @@ class CargoController extends Controller
         'result' => $Cargo
     ]);
 }
+
+public function getDataById(Request $request){
+
+    $cargo= Cargo::where('id',$request->id)->get();
+
+    return response()->json([
+        'status' => '200',
+        'message' => 'data..',
+        'data'=> $cargo
+    ]);
+}
     public function save(Request $request){
 
         $Cargo=Cargo::create([
